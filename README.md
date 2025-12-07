@@ -6,3 +6,5 @@ i have the three line commented out in the master branch they are:
         print("Routing API Status: " + str(paths_status) + "\nRouting API URL:\n" + paths_url)
 
 i spent hours thrying to figure this out
+
+ive put the version ive been using in the dev branch
