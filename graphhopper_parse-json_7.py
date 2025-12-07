@@ -5,6 +5,7 @@ geocode_url = "https://graphhopper.com/api/1/geocode?"
 route_url = "https://graphhopeer.com/api/1/route?"
 key = "d10485fa-74cb-40e1-935f-be8c5c988467"
 
+#geocoding funtion
 def geocoding (location, key):
     while location == "":
         location = input("Enter the location again: ")
@@ -45,9 +46,11 @@ def geocoding (location, key):
         if json_status != 200:
             print("Deocode API status: " + str(json_status) + "\nError message: " + json_data["message"])
     return json_status,lat,lng,new_loc
+#geocoding function end
 
+#user 
 while True:
-    print("\n+++++++++++++++++++++++++++++++++++++++++++++")
+    print("\n+++++++++++++++++++++++++++++++++++++++++++++++")
     print("Vehicle profiles available on Graphhopper:")
     print("+++++++++++++++++++++++++++++++++++++++++++++++")
     print("car, bike, foot")
