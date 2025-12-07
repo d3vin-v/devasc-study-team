@@ -64,6 +64,7 @@ while True:
     else:
         vehicle = "car"
         print("No valid vehicle profile was entered. Using the car profile.")
+    #the quit function misbehaves for some reason
     loc1 = input("Starting Location: ")
     if loc1 == "quit" or loc1 == "q":
         break
@@ -78,6 +79,7 @@ while True:
         op="&point="+str(orig[1])+"&2C"+str(orig[2])
         dp="&point="+str(dest[1])+"&2C"+str(dest[2])
         paths_url = route_url + urllib.parse.urlencode({"key":key, "vehicle":vehicle}) + op + dp
+        #this stuff crashes the program
 #        paths_status = requests.get(paths_url).status_code 
 #        paths_data = requests.get(paths_url).json()
 #        print("Routing API Status: " + str(paths_status) + "\nRouting API URL:\n" + paths_url)
