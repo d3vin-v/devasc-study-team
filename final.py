@@ -48,7 +48,7 @@ def geocoding (location, key):
     return json_status,lat,lng,new_loc
 #geocoding function end
 
-#user 
+#user input
 while True:
     print("\n+++++++++++++++++++++++++++++++++++++++++++++++")
     print("Vehicle profiles available on Graphhopper:")
@@ -79,10 +79,11 @@ while True:
         op="&point="+str(orig[1])+"&2C"+str(orig[2])
         dp="&point="+str(dest[1])+"&2C"+str(dest[2])
         paths_url = route_url + urllib.parse.urlencode({"key":key, "vehicle":vehicle}) + op + dp
+        #------------------------------
         #this stuff crashes the program
-#        paths_status = requests.get(paths_url).status_code 
-#        paths_data = requests.get(paths_url).json()
-#        print("Routing API Status: " + str(paths_status) + "\nRouting API URL:\n" + paths_url)
+        paths_status = requests.get(paths_url).status_code 
+        paths_data = requests.get(paths_url).json()
+        print("Routing API Status: " + str(paths_status) + "\nRouting API URL:\n" + paths_url)
     print("===========================================")
     print("Directions from " + orig[3] + " to " + dest[3] + " by " + vehicle)
     print("===========================================")
@@ -103,6 +104,7 @@ while True:
     else:
         print("Error message: " + paths_data["message"])
         print("**************************************************")
+        
 
 orig = geocoding(loc1, key)
 print(orig)
