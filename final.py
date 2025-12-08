@@ -7,8 +7,8 @@ key = "d10485fa-74cb-40e1-935f-be8c5c988467"
 
 #geocoding funtion
 def geocoding (location, key):
-#    while location == "":
-#        location = input("Enter the location again: ")
+    while location == "":
+        location = input("Enter the location again: ")
     geocode_url = "https://graphhopper.com/api/1/geocode?" 
     url = geocode_url + urllib.parse.urlencode({"q":location, "limit": "1", "key":key})
 
@@ -64,7 +64,6 @@ while True:
     else:
         vehicle = "car"
         print("No valid vehicle profile was entered. Using the car profile.")
-    #the quit function misbehaves for some reason
     loc1 = input("Starting Location: ")
     if loc1 == "quit" or loc1 == "q":
         break
@@ -79,8 +78,6 @@ while True:
         op="&point="+str(orig[1])+","+str(orig[2])
         dp="&point="+str(dest[1])+","+str(dest[2])
         paths_url = route_url + urllib.parse.urlencode({"key":key, "vehicle":vehicle}) + op + dp
-        #------------------------------
-        #this stuff crashes the program
         paths_status = requests.get(paths_url).status_code 
         paths_data = requests.get(paths_url).json()
         print("Routing API Status: " + str(paths_status) + "\nRouting API URL:\n" + paths_url)
@@ -104,10 +101,3 @@ while True:
     else:
         print("Error message: " + paths_data["message"])
         print("**************************************************")
-        
-'''
-orig = geocoding(loc1, key)
-print(orig)
-dest = geocoding(loc2, key)
-print(dest)
-'''
