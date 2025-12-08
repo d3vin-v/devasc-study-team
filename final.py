@@ -2,7 +2,7 @@ import requests
 import urllib.parse
 
 geocode_url = "https://graphhopper.com/api/1/geocode?"
-route_url = "https://graphhopeer.com/api/1/route?"
+route_url = "https://graphhopper.com/api/1/route?"
 key = "d10485fa-74cb-40e1-935f-be8c5c988467"
 
 #geocoding funtion
@@ -76,8 +76,8 @@ while True:
     dest = geocoding(loc2, key)
     print("===========================================")
     if orig[0] == 200 and dest[0] == 200:
-        op="&point="+str(orig[1])+"&2C"+str(orig[2])
-        dp="&point="+str(dest[1])+"&2C"+str(dest[2])
+        op="&point="+str(orig[1])+","+str(orig[2])
+        dp="&point="+str(dest[1])+","+str(dest[2])
         paths_url = route_url + urllib.parse.urlencode({"key":key, "vehicle":vehicle}) + op + dp
         #------------------------------
         #this stuff crashes the program
@@ -91,7 +91,7 @@ while True:
         miles = (paths_data["paths"][0]["distance"])/1000/1.65
         km = (paths_data["paths"][0]["distance"])/1000
         sec = int(paths_data["paths"][0]["time"]/1000%60)
-        min = int(paths_data["pahts"][0]["time"]/1000/60%60)
+        min = int(paths_data["paths"][0]["time"]/1000/60%60)
         hr = int(paths_data["paths"][0]["time"]/1000/60/60)
         print("Distance Traveled: {0:.1f} miles / {1:.1f} km".format(miles, km))
         print("Trip Duration: {0:02d}:{1:02d}:{2:02d}".format(hr, min, sec))
