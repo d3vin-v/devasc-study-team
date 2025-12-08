@@ -2,7 +2,7 @@ import requests
 import urllib.parse
 
 geocode_url = "https://graphhopper.com/api/1/geocode?"
-route_url = "https://graphhopeer.com/api/1/route?"
+route_url = "https://graphhopper.com/api/1/route?"
 key = "d10485fa-74cb-40e1-935f-be8c5c988467"
 
 def geocoding (location, key):
@@ -61,9 +61,9 @@ while True:
         op="&point="+str(orig[1])+"&2C"+str(orig[2])
         dp="&point="+str(dest[1])+"&2C"+str(dest[2])
         paths_url = route_url + urllib.parse.urlencode({"key":key}) + op + dp
-#        paths_status = requests.get(paths_url).status_code 
-#        paths_data = requests.get(paths_url).json()
-#        print("Routing API Status: " + str(paths_status) + "\nRouting API URL:\n" + paths_url)
+        paths_status = requests.get(paths_url).status_code 
+        paths_data = requests.get(paths_url).json()
+        print("Routing API Status: " + str(paths_status) + "\nRouting API URL:\n" + paths_url)
     print("===========================================")
     print("Directions from " + orig[3] + " to " + dest[3])
     print("===========================================")
@@ -84,8 +84,3 @@ while True:
     else:
         print("Error message: " + paths_data["message"])
         print("**************************************************")
-
-orig = geocoding(loc1, key)
-print(orig)
-dest = geocoding(loc2, key)
-print(dest)

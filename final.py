@@ -48,6 +48,7 @@ def geocoding (location, key):
     return json_status,lat,lng,new_loc
 #geocoding function end
 
+#routing function
 def routing (vehicle):
     loc1 = input("Starting Location: ")
     if loc1 == "quit" or loc1 == "q":
@@ -100,6 +101,7 @@ def routing (vehicle):
         print("**************************************************")
 
     return
+#routing function end
 
 #user input
 while True:
@@ -108,7 +110,7 @@ while True:
     print("1. Route finder")
     print("2. Basic geocoding")
     print("3. Quit")
-    menu = input("Enter you selection:")
+    menu = input("Enter your selection:")
     #menu
     if menu == "1":
         print("\n+++++++++++++++++++++++++++++++++++++++++++++++")
@@ -136,3 +138,8 @@ while True:
             break
     elif menu == "3":
         break
+    elif menu == "q" or menu == "quit":
+        break
+    else:
+        print("Please try again.")
+    #menu end
