@@ -7,8 +7,8 @@ key = "d10485fa-74cb-40e1-935f-be8c5c988467"
 
 #geocoding funtion
 def geocoding (location, key):
-    while location == "":
-        location = input("Enter the location again: ")
+#    while location == "":
+#        location = input("Enter the location again: ")
     geocode_url = "https://graphhopper.com/api/1/geocode?" 
     url = geocode_url + urllib.parse.urlencode({"q":location, "limit": "1", "key":key})
 
@@ -105,8 +105,9 @@ while True:
         print("Error message: " + paths_data["message"])
         print("**************************************************")
         
-
+'''
 orig = geocoding(loc1, key)
 print(orig)
 dest = geocoding(loc2, key)
 print(dest)
+'''
