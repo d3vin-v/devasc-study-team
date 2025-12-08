@@ -96,6 +96,7 @@ def display_landmarks(landmarks):
 
 #routing function (called in menu)  
 def routing (vehicle):
+    points = []
     loc1 = input("Starting Location: ")
     if loc1 == "quit" or loc1 == "q":
         return
@@ -141,7 +142,13 @@ def routing (vehicle):
             path = paths_data["paths"][0]["instructions"][each]["text"]
             distance = paths_data["paths"][0]["instructions"][each]["distance"]
             print("{0} ( {1:.1f} km / {2:.1f} miles)".format(path, distance/1000, distance/1000/1.60934))
+
         print("===========================================")
+        '''
+        point = int(dest[1]), int(dest[2])
+        points.append(point)
+        display_landmarks(scan_route_for_landmarks(points))
+        '''
     else:
         print("Error message: " + paths_data["message"])
         print("**************************************************")
