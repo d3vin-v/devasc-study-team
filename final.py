@@ -50,6 +50,19 @@ def geocoding (location, key):
 
 #user input
 while True:
+    print("\n###############################################")
+    print("\nMenu")
+    print("1. Route finder")
+    print("2. Basic geocoding")
+    print("3. Quit")
+    menu = input("")
+    #menu
+    if menu == "1":
+        routing()
+    elif menu == "2":
+        geocoding()
+    elif menu == "3":
+        break
     print("\n+++++++++++++++++++++++++++++++++++++++++++++++")
     print("Vehicle profiles available on Graphhopper:")
     print("+++++++++++++++++++++++++++++++++++++++++++++++")
