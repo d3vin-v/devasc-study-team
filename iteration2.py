@@ -1,6 +1,5 @@
 import math
 import requests
-import requests
 import urllib.parse
 import colorama
 from colorama import Fore, Back, Style

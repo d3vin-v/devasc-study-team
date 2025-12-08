@@ -1,11 +1,14 @@
+import math
 import requests
 import urllib.parse
+import colorama #added imports
+from colorama import Fore, Back, Style
 
 geocode_url = "https://graphhopper.com/api/1/geocode?"
 route_url = "https://graphhopper.com/api/1/route?"
 key = "d10485fa-74cb-40e1-935f-be8c5c988467"
 
-#geocoding funtion
+#geocoding funtion (unchanged from original code, called in menu and routing())
 def geocoding (location, key):
     while location == "":
         location = input("Enter the location again: ")
@@ -48,6 +51,50 @@ def geocoding (location, key):
     return json_status,lat,lng,new_loc
 #geocoding function end
 
+
+def wiki_landmarks(lat, lng, radius=1000):
+    url = "https://en.wikipedia.org/w/api.php"
+    params = {
+        "action": "query",
+        "list": "geosearch",
+        "gscoord": f"{lat}|{lng}",
+        "gsradius": radius,
+        "gslimit": 10,
+        "format": "json"
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    return data.get("query", {}).get("geosearch", [])
+
+# Function to scan entire route polyline for nearby landmarks
+def scan_route_for_landmarks(points):
+    found = []
+    for pt in points:
+        lat, lng = pt
+        landmarks = wiki_landmarks(lat, lng)
+        for lm in landmarks:
+            found.append({
+                "name": lm.get("title", "Unknown"),
+                "dist": lm.get("dist", 0),
+                "lat": lm.get("lat"),
+                "lon": lm.get("lon")
+            })
+    return found
+
+# Function to display landmark information
+def display_landmarks(landmarks):
+    if not landmarks:
+        print("No historical landmarks detected along this route.")
+        return
+    print("Historical Landmarks Along Route:")
+    print("------------------------------------")
+    for lm in landmarks:
+        print(f"Name: {lm['name']}")
+        print(f"Distance from route segment: {lm['dist']:.1f} meters")
+        print(f"Location: {lm['lat']}, {lm['lon']}")
+        print("------------------------------------")
+
+#routing function (called in menu)  
 def routing (vehicle):
     loc1 = input("Starting Location: ")
     if loc1 == "quit" or loc1 == "q":
@@ -101,13 +148,15 @@ def routing (vehicle):
 
     return
 
+color = True
 #user input
 while True:
     print("\n###############################################")
     print("\nMenu")
     print("1. Route finder")
     print("2. Basic geocoding")
-    print("3. Quit")
+    print("3. Toggle colors")
+    print("4. Quit")
     menu = input("Enter you selection:")
     #menu
     if menu == "1":
@@ -135,4 +184,11 @@ while True:
             print("Invalid location.")
             break
     elif menu == "3":
+        if color:
+            print(Fore.BLACK + Back.WHITE)
+            color = False
+        else:
+            print(Fore.WHITE + Back.BLACK)
+            color = True
+    elif menu == "4" or menu == "q" or menu == "quit":
         break
